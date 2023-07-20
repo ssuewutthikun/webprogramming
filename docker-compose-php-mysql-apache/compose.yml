@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - db
-    #image: php:8.2-apache
+    image: php:8.2-apache
     volumes:
       - ./php/src:/var/www/html/
     ports:
