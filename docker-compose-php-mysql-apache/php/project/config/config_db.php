@@ -13,30 +13,12 @@
     @mysqli_set_charset($conn, "utf8");
     @mysqli_query($conn,"SET NAMES UTF8");
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
-    /*
-    @date_default_timezone_set("Asia/Bangkok");
-    @mysqli_set_charset($conn, "utf8");
-    @mysqli_query($conn,"SET NAMES UTF8");
-
+    /**
     $strSQL="SELECT * FROM customer";
     $query = @mysqli_query($conn,$strSQL);
-    //$resultObj = @mysqli_fetch_array($query, MYSQLI_ASSOC);  
-    //print_r($resultObj);  
     while($resultObj = @mysqli_fetch_array($query,MYSQLI_ASSOC)){
         print_r($resultObj);
     }
-    */
+    **/
 ?>
