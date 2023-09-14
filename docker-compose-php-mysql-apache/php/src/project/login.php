@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    /*print_r(session_id());
+    exit;*/
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +27,7 @@
                             </div>
                             <div class="form-group space_box">
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="Password">
+                                <input type="password" class="form-control" id="password">
                             </div>
                             <div class="space box" align="center">
                                 <button type="button" class="btn btn-primary" style="padding: 10px 20px 10px 20px" onclick="login()">Login</button>
@@ -41,26 +46,48 @@
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
+<script type=text/javascript>
+    var session = "<?php echo session_id(); ?>";
     function login(){
-        console.log("Call login by console");
-        let request_data={
-            "email":"pim@gmail.com",
-            "password":"123456"
+        let username;
+        let password;
+        username = document.getElementById("username").value;
+        password=document.getElementById("password").value;
+        //document.getElementById("username").value = "abc";
+        let request_data = {
+            "email":username,
+            "password":password,
+            "session":session
         }
-
+        console.log(request_data);
+        let uri = "http://localhost:8080/project/api/get_customer_login.php";
+        //url = Uniform Resource Locator
+        //uri = Uniform Resource Identifie
         $.ajax({
-           type:"POST",
-           url:"http://localhost:8080/project/api/get_customer_login.php",
-           async:false,
-           data:JSON.stringify(request_data),
-           success:function(response){
-                console.log("success..");
-           },error:function(error){
+            type:"POST",
+            url:uri,
+            async:false,
+            data:JSON.stringify(request_data),
+            success:function(response){
+                console.log("connect success..."); 
+                console.log(response);
+                console.log(response.result);
+                console.log(response.message);
+                if(response.result===1){
+                    //console.log("go to home.php");
+                    window.location.replace("http://127.0.0.1:8080/project/home.php");
+                }else{
+                    //console.log("go to login.php");
+                    document.getElementById("username").value ="";
+                    document.getElementById("password").value ="";
+                    document.getElementById("username").focus();
+                    alert("เข้าสู่ระบบไม่สำเร็จ"); 
+                }
+            },error:function(error){
                 console.log(error);
-           }
+            }
         });
+
     }
 </script>
