@@ -54,7 +54,6 @@
         let password;
         username = document.getElementById("username").value;
         password=document.getElementById("password").value;
-        //document.getElementById("username").value = "abc";
         let request_data = {
             "email":username,
             "password":password,
