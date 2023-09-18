@@ -30,6 +30,7 @@
         $sku = $resultQuery['sku'];
         $id = $resultQuery['id'];
         $pname = $resultQuery['pname'];
+        $detail = $resultQuery['detail'];
         $price = $resultQuery['price'];
         $nums = $resultQuery['nums'];
         $imgid = $resultQuery['imgid'];
