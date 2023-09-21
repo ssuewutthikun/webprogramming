@@ -47,6 +47,12 @@
                             <div class="card-image" style="width:150px;height:150px;align-items: center;">
                                 <img src="./assets/images/product-default.png" class="card-img-top" />
                             </div>
+                            <div class="card-content">
+                                <h5 class="card-title">ชื่อสินค้า 1</h5>
+                                <p class="card-text">รายละเอียดสินค้า 1</p>
+                                <p class="card-text">ราคา: ราคาสินค้า 1</p>
+                                <button  class="btn btn-danger">เพิ่มลงตะกร้า</button>                                    
+                            </div>
                         </div>
                     </div>
                 </div>
