@@ -89,7 +89,12 @@
             async:false,
             data:null,
             success:function(response){
-                console.log(response);
+                //console.log(response);
+                if(response.result===1){
+                    console.log(response.datalist);
+                }else{
+                    console.log(response.message); 
+                }
             },error:function(error){
                 console.log(error);
             }
