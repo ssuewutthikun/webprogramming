@@ -44,7 +44,9 @@
                 <div class="row" style="padding:10px">
                     <div class="col-md-3 mb-3">
                         <div class="card" style="background-color: #FFF;margin:5px">
-                            P1
+                            <div class="card-image" style="width:150px;height:150px;align-items: center;">
+                                <img src="./assets/images/product-default.png" class="card-img-top" />
+                            </div>
                         </div>
                     </div>
                 </div>
