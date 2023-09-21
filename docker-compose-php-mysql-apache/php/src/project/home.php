@@ -91,7 +91,10 @@
             success:function(response){
                 //console.log(response);
                 if(response.result===1){
-                    console.log(response.datalist);
+                    //console.log(response.datalist);
+                    for(let i=0;i<response.datalist.length;i++){
+                        console.log(response.datalist[i].pname);
+                    }
                 }else{
                     console.log(response.message); 
                 }
