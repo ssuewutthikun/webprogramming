@@ -55,6 +55,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card" style="background-color: #FFF;margin:5px">
+                            <div class="card-image" style="width:150px;height:150px;align-items: center;">
+                                <img src="./assets/images/product-default.png" class="card-img-top" />
+                            </div>
+                            <div class="card-content">
+                                <h5 class="card-title">ชื่อสินค้า 2</h5>
+                                <p class="card-text">รายละเอียดสินค้า 2</p>
+                                <p class="card-text">ราคา: ราคาสินค้า 2</p>
+                                <button  class="btn btn-danger">เพิ่มลงตะกร้า</button>                                    
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,3 +78,21 @@
     </footer>-->
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type=text/javascript>
+    getProductList();
+    function getProductList(){
+        let uri = "http://localhost:8080/project/api/get_product_list.php";
+        $.ajax({
+            type:"POST",
+            url:uri,
+            async:false,
+            data:null,
+            success:function(response){
+                console.log(response);
+            },error:function(error){
+                console.log(error);
+            }
+        });
+    }
+</script>
