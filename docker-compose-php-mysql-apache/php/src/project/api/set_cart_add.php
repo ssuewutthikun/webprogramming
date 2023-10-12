@@ -31,7 +31,6 @@
     $strSQL="INSERT INTO  cart (customer_id,product_id,sku,num,price,total) VALUE ('".$inputCustomerId."','".$inputProductId."','".$sku."','".$inputNum."','".$inputPrice."','".$total."')";
     //print_r($strSQL);
     $query = @mysqli_query($conn,$strSQL);
-
     $strSQL="SELECT SUM(num) As snum,SUM(total) As stotal FROM cart WHERE customer_id='".$inputCustomerId."'";
     print_r($strSQL);
     $query = @mysqli_query($conn,$strSQL);
@@ -48,7 +47,19 @@
     }else{
         echo $json_response = json_encode(array("result"=>0,"message"=>"ไม่พบข้อมูล","snum"=>0,"stotal"=>0));
     }
+    _log_set_cart_add($content,$json_response);
+    exit;
 ?>
 <?php
     #log function
+	#ใครเรียกใช้งาน? #เวลาที่เรียกใช้งาน?   #ส่งอะไรมา?  #เราตอบอะไรกลับ? 
+    function _log_set_cart_add($content,$json_response){
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $date = @date("Y-m-d H:i:s");
+        $_log = "\n".$date." ".$ip." request:".$content." response:".$json_response;
+        $objFopen=@fopen("log/_log_set_cart_add.log","a+"); #a a+ w w+
+        @fwrite($objFopen,$_log);
+        @fclose($objFopen);
+    }
+
 ?>
