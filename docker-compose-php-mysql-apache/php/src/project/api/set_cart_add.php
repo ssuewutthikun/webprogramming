@@ -41,7 +41,7 @@
 ?>
 <?php
     #output
-    //ob_end_clean();
+    ob_end_clean();
     @mysqli_close($conn);
     if($query){
         echo $json_response = json_encode(array("result"=>1,"message"=>"พบข้อมูล","snum"=>$snum,"stotal"=>$stotal));
