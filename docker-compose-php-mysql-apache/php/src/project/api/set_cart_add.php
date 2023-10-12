@@ -14,7 +14,7 @@
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $content = @file_get_contents('php://input');
         $json_data = @json_decode($content, true);
-        $customerId = trim($json_data["customer_id"]);
+        $inputCustomerId = trim($json_data["customer_id"]);
         $inputProductId = trim($json_data["product_id"]);
         $inputNum = trim($json_data["num"]);
         $inputPrice = trim($json_data["price"]);
@@ -28,8 +28,12 @@
 ?>
 <?php
     #process
-    $strSQL="INSERT INTO  cart (customer_id,product_id,sku,num,price,total) VALUE ('".$customerId."','".$inputProductId."','".$sku."','".$inputNum."','".$inputPrice."','".$total."')";
+    $strSQL="INSERT INTO  cart (customer_id,product_id,sku,num,price,total) VALUE ('".$inputCustomerId."','".$inputProductId."','".$sku."','".$inputNum."','".$inputPrice."','".$total."')";
     //print_r($strSQL);
+    $query = @mysqli_query($conn,$strSQL);
+
+    $strSQL="SELECT SUM(num) As snum,SUM(total) As stotal FROM cart WHERE customer_id='".$inputCustomerId."'";
+    print_r($strSQL);
     $query = @mysqli_query($conn,$strSQL);
 ?>
 <?php
