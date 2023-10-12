@@ -30,23 +30,25 @@
     $strSQL="SELECT * FROM customer WHERE email = '".$inputEmail."' ";
     $query = @mysqli_query($conn,$strSQL);
     $resultQuery = @mysqli_fetch_array($query);
-    print_r($resultQuery);
-
+    //print_r($resultQuery);
+    $datalist = array();
     if(trim($resultQuery['email']) !="" && trim($resultQuery['password']) == $inputPassword){
         $result=1;
         $message ="เข้าสู่ระบบ";
-        $strSQL="UPDATE customer SET session='".$session."' WHERE email ='".$resultQuery['email']."' ";
+        $datalist = array("id"=>$resultQuery['id'],"name"=>$resultQuery['name'],"email"=>$resultQuery['email']);
+        $strSQL="UPDATE customer SET session ='".$session."' WHERE email ='".trim($resultQuery['email'])."' ";
         $query = @mysqli_query($conn,$strSQL);
     }else{
         $result=0;
         $message ="เข้าสู่ระบบไม่สำเร็จ";
+        $datalist = null;
     }
 ?>
 <?php
     #output
     ob_end_clean();
     @mysqli_close($conn);
-    echo $json_response = json_encode(array("result"=>$result,"message"=>$message));
+    echo $json_response = json_encode(array("result"=>$result,"message"=>$message,"datalist"=>$datalist));
     _log_customer_login($content,$json_response);
     exit;
 ?>
