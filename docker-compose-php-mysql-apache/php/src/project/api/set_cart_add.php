@@ -35,9 +35,19 @@
     $strSQL="SELECT SUM(num) As snum,SUM(total) As stotal FROM cart WHERE customer_id='".$inputCustomerId."'";
     print_r($strSQL);
     $query = @mysqli_query($conn,$strSQL);
+    $resultQuery = @mysqli_fetch_array($query);
+    $snum=intval($resultQuery['snum']);
+    $stotal=floatval($resultQuery['stotal']);
 ?>
 <?php
     #output
+    //ob_end_clean();
+    @mysqli_close($conn);
+    if($query){
+        echo $json_response == json_encode(array("result"=>1,"message"=>"พบข้อมูล","snum"=>$snum,"stotal"=>$stotal));
+    }else{
+        echo $json_response = json_encode(array("result"=>0,"message"=>"ไม่พบข้อมูล","snum"=>0,"stotal"=>0));
+    }
 ?>
 <?php
     #log function
