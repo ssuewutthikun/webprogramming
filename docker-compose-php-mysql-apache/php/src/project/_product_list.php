@@ -25,7 +25,7 @@
                                     <h5 class='card-title'>`+response.datalist[i].pname+`</h5>
                                     <p class='card-text'>รายละเอียดสินค้า <br>`+response.datalist[i].detail+`</p>
                                     <p class='card-text'>ราคา: `+response.datalist[i].price+` บาท</p>
-                                    <button  class='btn btn-danger' onclick='addCart()' >เพิ่มลงตะกร้า</button>
+                                    <button  class='btn btn-danger' onclick='addCart("`+response.datalist[i].id+`",1,`+response.datalist[i].price+`)' >เพิ่มลงตะกร้า</button>
                                 </div>
                             </div>
                         </div>                        
@@ -40,7 +40,7 @@
         });
         document.getElementById("content").innerHTML ="<div class='row' style='padding:10px'>"+innerhtml+"</div>";
     }
-    function addCart(){
-        alert("addItem");
+    function addCart(id,num,price){
+        alert("addItem:"+id+":"+num+":"+price);
     }
 </script>
