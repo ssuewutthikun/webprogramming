@@ -1,7 +1,7 @@
 <?php
     session_start();
-    /*print_r(session_id());
-    exit;*/
+    /**print_r(session_id());
+    exit;**/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,21 +48,20 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type=text/javascript>
-    var session = "<?php echo session_id(); ?>";
+    var session = "<?php echo session_id();?>";
     function login(){
         let username;
         let password;
         username = document.getElementById("username").value;
-        password=document.getElementById("password").value;
+        password = document.getElementById("password").value;
         let request_data = {
             "email":username,
             "password":password,
-            "session":session
+            "session":session 
         }
         console.log(request_data);
+
         let uri = "http://localhost:8080/project/api/get_customer_login.php";
-        //url = Uniform Resource Locator
-        //uri = Uniform Resource Identifie
         $.ajax({
             type:"POST",
             url:uri,
@@ -74,14 +73,18 @@
                 console.log(response.result);
                 console.log(response.message);
                 if(response.result===1){
-                    //console.log("go to home.php");
-                    window.location.replace("http://127.0.0.1:8080/project/home.php");
+                    localStorage.setItem("customer_profile",JSON.stringify(response.datalist));
+                    /**let customer_profile = localStorage.getItem("customer_profile");
+                    customer_profile = JSON.parse(customer_profile);
+                    console.log(customer_profile.email);
+                    **/
+                    window.location.replace("http://127.0.0.1:8080/project/home.php?menu=productlist");
                 }else{
-                    //console.log("go to login.php");
-                    document.getElementById("username").value ="";
-                    document.getElementById("password").value ="";
+                    //console.log("go to login.php"); 
+                    document.getElementById("username").value = "";
+                    document.getElementById("password").value = "";
                     document.getElementById("username").focus();
-                    alert("เข้าสู่ระบบไม่สำเร็จ"); 
+                    alert("เข้าสู่ระบบไม่สำเร็จ");                    
                 }
             },error:function(error){
                 console.log(error);

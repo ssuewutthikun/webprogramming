@@ -41,6 +41,29 @@
         document.getElementById("content").innerHTML ="<div class='row' style='padding:10px'>"+innerhtml+"</div>";
     }
     function addCart(id,num,price){
-        alert("addItem:"+id+":"+num+":"+price);
+        let customer_profile = localStorage.getItem("customer_profile");
+        customer_profile = JSON.parse(customer_profile);
+        console.log(customer_profile.id);
+        let customer_id = customer_profile.id;
+        alert("addItem:"+customer_id+":"+id+":"+num+":"+price);
+        let request_data = {
+            "customer_id":customer_id,
+            "product_id":id,
+            "num":num,
+            "price":price
+        }
+        let uri="http://localhost:8080/project/api/set_cart_add.php";
+
+        $.ajax({
+            type:"POST",
+            url:uri,
+            data:JSON.stringify(request_data),
+            async:false,
+            success:function(response){
+                console.log(response);
+            },error:function(error){
+                console.log(error);
+            }
+        });        
     }
 </script>

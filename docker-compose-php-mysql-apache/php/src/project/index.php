@@ -16,15 +16,3 @@
 
 
 
-
-
-
-
-
-
-<?php
-    /** 
-    header( "location: ./home.php" );
-    exit(0);
-    */
-?>
