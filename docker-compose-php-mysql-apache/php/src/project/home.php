@@ -22,54 +22,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./css/main_style.css">
 </head>
-<body>
+<body onload="getEnvironment()">
     <header style="background-color: yellow;">
         <h1>Header</h1>
+        <div align="right">
+            <i class="fa fa-shopping-cart" style="font-size:22px"></i>
+            [<label id="num_cart">88</label>]
+            <label id="customer_profile_name">customer_name</label>
+            <input type="hidden" id="customer_profile_id"/>
+            <input type="hidden" id="customer_profile_email"/>
+        </div>
     </header>
 
     <div class="row" style="background-color: green;">
         <nav class="column menu" style="background-color: lightcyan;">
             <h2>Menu</h2>
             <ul>
-                <li><a href="#">Menu 1</a></li>
-                <li><a href="#">Menu 2</a></li>
+                <li><a href="./home.php?menu=productlist">Menu 1</a></li>
+                <li><a href="./home.php?menu=xxx">Menu 2</a></li>
                 <!-- Add more menu items here -->
             </ul>
         </nav>
         <div class="column content" style="background-color: burlywood;">
+            <?php
+                if(@$_GET['menu']==="productlist"){
+                    include "_product_list.php";
+                }else{
+
+                }
+            ?>
             <!--- content -->
-            <div id="content">
-                <div class="row" style="padding:10px">
-                    <div class="col-md-3 mb-3">
-                        <div class="card" style="background-color: #FFF;margin:5px">
-                            <div class="card-image" style="width:150px;height:150px;align-items: center;">
-                                <img src="./assets/images/product-default.png" class="card-img-top" />
-                            </div>
-                            <div class="card-content">
-                                <h5 class="card-title">ชื่อสินค้า 1</h5>
-                                <p class="card-text">รายละเอียดสินค้า 1</p>
-                                <p class="card-text">ราคา: ราคาสินค้า 1</p>
-                                <button  class="btn btn-danger">เพิ่มลงตะกร้า</button>                                    
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="card" style="background-color: #FFF;margin:5px">
-                            <div class="card-image" style="width:150px;height:150px;align-items: center;">
-                                <img src="./assets/images/product-default.png" class="card-img-top" />
-                            </div>
-                            <div class="card-content">
-                                <h5 class="card-title">ชื่อสินค้า 2</h5>
-                                <p class="card-text">รายละเอียดสินค้า 2</p>
-                                <p class="card-text">ราคา: ราคาสินค้า 2</p>
-                                <button  class="btn btn-danger">เพิ่มลงตะกร้า</button>                                    
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -80,27 +65,15 @@
 </html>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type=text/javascript>
-    getProductList();
-    function getProductList(){
-        let uri = "http://localhost:8080/project/api/get_product_list.php";
-        $.ajax({
-            type:"POST",
-            url:uri,
-            async:false,
-            data:null,
-            success:function(response){
-                //console.log(response);
-                if(response.result===1){
-                    //console.log(response.datalist);
-                    for(let i=0;i<response.datalist.length;i++){
-                        console.log(response.datalist[i].pname);
-                    }
-                }else{
-                    console.log(response.message); 
-                }
-            },error:function(error){
-                console.log(error);
-            }
-        });
+    function getEnvironment(){
+        let customer_profile = localStorage.getItem("customer_profile");
+        customer_profile = JSON.parse(customer_profile);
+        console.log(customer_profile.email);  
+        console.log(customer_profile.name);    
+        document.getElementById("customer_profile_name").innerHTML =  customer_profile.name;
+        //code here
+        getProductList();
     }
+
+
 </script>
